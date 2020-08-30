@@ -1,0 +1,8 @@
+use employeesDB;
+
+INSERT INTO department (name) VALUES ('accounting and finance', 'purchasing', 'production', 'marketing', 'human resources');
+
+INSERT INTO role (title, salary, department_id) VALUES ('Accountant', '$62,950.00', 1) ('Reception', '$45,000.00', 5) ('Sales Representative', '$37,550.00', 3);
+
+INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES
+('Paula', 'Johnson', 3, 4), ('Dale', 'Jenkins', 5, 3)
