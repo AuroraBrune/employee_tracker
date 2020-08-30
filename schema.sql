@@ -9,6 +9,7 @@ CREATE TABLE department (
     name VARCHAR(30),
  );
 
+
  CREATE TABLE role (
     id INT NOT NULL AUTO_INCREMENT ,
     title VARCHAR(30),
