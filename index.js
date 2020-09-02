@@ -106,27 +106,49 @@ function addRoles() {
       },
     ])
       .then(function({title, salary, department_id}) {
-          connection.query("INSERT INTO role (title, salary, department_id) VALUES ('" + title +"', + salary ,  +  department_id )", function (err, result) {
+          connection.query("INSERT INTO employee (title, salary, department_id) VALUES ('" + title + "',  + salary, + department_id)", function (err, result) {
               if (err) throw err;
               start();
           });
           
       })
-}
+}                           //work on numbers values, going in as null
+                                // ).then(function ({ first_name, last_name, manager }) {
+                                //     connection.query("INSERT INTO employee (first_name, last_name, manager) 
+                                //         VALUES ?", ('first_name', 'last_name', 'manager'), function (err, result) {
+                                //         if (err) throw err;
+//                                 // })
 
-// function addEmp() {
-//     inquirer
-//       .prompt({
-//           name: "name",
-//           type: "input",
-//           message: "What employee would you like to add?"
-//       })
-//       .then(function({name}) {
-//           connection.query("INSERT INTO role (name) VALUES ('" + name + "')", function (err, result) {
-//               if (err) throw err;
-              
-//           });
-//       })
-// }
+function addEmp() {
+    inquirer
+      .prompt([
+          {
+          name: "first_name",
+          type: "input",
+          message: "What is employee's first name?"
+      },
+      {
+          name: "last_name",
+          type: "input",
+          message: "What is employee's last name?"
+      },
+      {
+          name: "role_id",
+          type: "input",
+          message: "What is the employee's id number?"
+      },
+      {
+          name: "manager_id",
+          type: "input",
+          message: "What is the manager's id for this employee?"
+      },
+    ])
+      .then(function({first_name, last_name, role_id, manager_id}) {
+          connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id ) VALUES ('" + first_name + "', '" + last_name + "', + role_id, + manager_id)", function (err, result) {
+              if (err) throw err;
+              start();
+          });
+      })
+}
       
       
