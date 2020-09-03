@@ -132,7 +132,7 @@ function addEmp() {
             {
                 name: "role_id",
                 type: "input",
-                message: "What is the employee's id number?"
+                message: "What is the employee's role id number?"
             },
             {
                 name: "manager_id",
@@ -140,14 +140,13 @@ function addEmp() {
                 message: "What is the manager's id for this employee?"
             },
         ])
-//         .then(function ({ first_name, last_name, role_id, manager_id  }) {
-//             connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id )" + 
-//              "VALUES ('" + first_name + "', '" + last_name + "', + role_id, + manager_id)", function (err, answers) {
-//                 if (err) throw err;
-//                 start();
-//             });
-//         })
-// }
+        .then(function ({ first_name, last_name, role_id, manager_id  }) {
+            connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id )" + 
+             "VALUES ('" + first_name + "', '" + last_name + "', " + parseInt(role_id) + ", " + parseInt(manager_id) + ")", function (err, answers) {
+                if (err) throw err;
+                start();
+            });
+        })
+}
 
 
-// function({first_name, last_name, role_id, manager_id})
