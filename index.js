@@ -32,7 +32,7 @@ function start() {
                 "Add departments.",
                 "Add roles.",
                 "Add employees.",
-                "View departments.",
+                "View department.",
                 "View roles.",
                 "View employees.",
                 "Update employee roles."
@@ -52,7 +52,7 @@ function start() {
                     addEmp();
                     break;
 
-                case "View departments.":
+                case "View department.":
                     viewDep();
                     break;
 
@@ -107,14 +107,14 @@ function addRoles() {
         ])
         .then(function ({ title, salary, department_id }) {
             connection.query("INSERT INTO role (title, salary, department_id) " +
-            "VALUES ('" + title + "', " + parseInt(salary) + ", " + parseInt(department_id) + ")",
+                "VALUES ('" + title + "', " + parseInt(salary) + ", " + parseInt(department_id) + ")",
                 function (err, results) {
-                if (err) throw err;
-                start();
+                    if (err) throw err;
+                    start();
                 });
 
         })
-}     
+}
 
 function addEmp() {
     inquirer
@@ -140,13 +140,43 @@ function addEmp() {
                 message: "What is the manager's id for this employee?"
             },
         ])
-        .then(function ({ first_name, last_name, role_id, manager_id  }) {
-            connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id )" + 
-             "VALUES ('" + first_name + "', '" + last_name + "', " + parseInt(role_id) + ", " + parseInt(manager_id) + ")", function (err, answers) {
-                if (err) throw err;
-                start();
-            });
+        .then(function ({ first_name, last_name, role_id, manager_id }) {
+            connection.query("INSERT INTO employee (first_name, last_name, role_id, manager_id )" +
+                "VALUES ('" + first_name + "', '" + last_name + "', " + parseInt(role_id) + ", " + parseInt(manager_id) + ")", function (err, answers) {
+                    if (err) throw err;
+                    start();
+                });
         })
+}
+
+function viewDep() {
+    connection.query("SELECT * FROM department", function(err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+        console.table(res[i].id + " | " + res[i].name);
+        }
+    });   
+}
+
+function viewRoles() {
+    connection.query("SELECT * FROM role", function(err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+            console.table(res[i].id + " | " + res[i].title + " | " + res[i].salary + 
+            " | " + res[i].department_id);
+
+        }
+    });
+}
+
+function viewEmp() {
+    connection.query("SELECT * FROM employee", function(err, res) {
+        if (err) throw err;
+        for (var i = 0; i < res.length; i++) {
+        console.table(res[i].id + " | " + res[i].first_name + " | " + res[i].last_name + 
+        " | " + res[i].role_id + " | " + res[i].manager_id);
+    }
+  });
 }
 
 
