@@ -1,7 +1,7 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
 const mysql = require('mysql');
-
+//Creating our connection to the MySQL workbench. 
 var connection = mysql.createConnection({
     host: "localhost",
 
@@ -15,15 +15,15 @@ var connection = mysql.createConnection({
     password: "81PW72LA",
     database: "employeesDB"
 });
-
+//Establishing our connection with MySQL workbench. 
 connection.connect(function (err) {
     if (err) throw err;
     console.log("connected as id " + connection.threadId);
     start();
 });
-
+// Function to start the Command Line Prompt of user to update or view the employees database.
 function start() {
-    inquirer
+    inquirer       //List of prompt choices for the user to select  that will start each function.
         .prompt({
             name: "action",
             type: "rawlist",
@@ -38,6 +38,7 @@ function start() {
                 "Update employee roles."
             ]
         })
+        //Switch case function to perform each function as selected by the user. 
         .then(function (answer) {
             switch (answer.action) {
                 case "Add departments.":
@@ -70,7 +71,8 @@ function start() {
             }
         });
 }
-
+    //Functions to add information to each table the user chooses. Followed by the writing 
+    //data to the table.
 function addDep() {
     inquirer
         .prompt({
@@ -148,35 +150,37 @@ function addEmp() {
                 });
         })
 }
-
+    //User can view the tables on the console with console.table.
 function viewDep() {
     connection.query("SELECT * FROM department", function(err, res) {
         if (err) throw err;
-        for (var i = 0; i < res.length; i++) {
-        console.table(res[i].id + " | " + res[i].name);
+        for (var i = 0; i < 1; i++) {
+        const table = cTable.getTable(res);
+        console.table(table);
+        start();
         }
-    });   
-}
+        })
+    };   
 
 function viewRoles() {
     connection.query("SELECT * FROM role", function(err, res) {
         if (err) throw err;
-        for (var i = 0; i < res.length; i++) {
-            console.table(res[i].id + " | " + res[i].title + " | " + res[i].salary + 
-            " | " + res[i].department_id);
-
-        }
-    });
-}
+        for (var i = 0; i < 1; i++) {
+            const table = cTable.getTable(res);
+            console.table(table);
+            start();
+            }
+            })
+        };   
 
 function viewEmp() {
     connection.query("SELECT * FROM employee", function(err, res) {
         if (err) throw err;
-        for (var i = 0; i < res.length; i++) {
-        console.table(res[i].id + " | " + res[i].first_name + " | " + res[i].last_name + 
-        " | " + res[i].role_id + " | " + res[i].manager_id);
-    }
-  });
-}
-
+        for (var i = 0; i < 1; i++) {
+            const table = cTable.getTable(res);
+            console.table(table);
+            start();
+            }
+            })
+        };   
 
