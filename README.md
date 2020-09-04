@@ -145,3 +145,7 @@ https://aurorabrune.github.io/employee_tracker/
 Screenshot of the tables
 -
 ![Employee Tracker](assets/tablesview1.png)
+--
+screencastify video of operation
+
+https://drive.google.com/file/d/1JOEfi43vlau_JFsOlZ-ksgT7x6WjcyTK/view?usp=sharing

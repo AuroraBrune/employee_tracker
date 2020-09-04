@@ -182,5 +182,27 @@ function viewEmp() {
             start();
             }
             })
-        };   
-
+        }; 
+        
+    function updateEmp() {
+        inquirer
+        .prompt ([
+            {
+            name: "id",
+            type: "input",
+            message: "Give the id of employee you would like to update?"
+        },
+        {
+            name: "role_id",
+            type: "input",
+            message: "What is the new role id for this employee?"
+        }, 
+    ]).then(function ({id, role_id}) {
+        connection.query("UPDATE employee as e INNER JOIN role as r ON e.role_id = r.id "  +
+        "SET  e.role_id  =  " + parseInt(role_id) + "  WHERE e.id = " + parseInt(id), function(err, answers) {
+            if (err) throw err;
+            start();
+        });    
+        })
+    
+    }
