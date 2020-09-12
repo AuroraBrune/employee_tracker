@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const cTable = require('console.table');
+require('dotenv').config();
 const mysql = require('mysql');
 //Creating our connection to the MySQL workbench. 
 var connection = mysql.createConnection({
@@ -12,7 +13,7 @@ var connection = mysql.createConnection({
     user: "aurora",
 
     // password
-    password: "81PW72LA",
+    password: process.env.PASSWORD,
     database: "employeesDB"
 });
 //Establishing our connection with MySQL workbench. 
